@@ -48,5 +48,19 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #007bff   ;
+}
+
+span {
+    display: block;
+    width: 100%;
+    color: white;
+}
+
+.no_response, .wrong {
+    background-color: red;
+}
+
+.ok {
+    background-color: green;
 }
