@@ -1,6 +1,6 @@
 <?php   
     class Quiz {
-        const answers = array( // Fix the typo in the constant name
+        const answers = array(
             'q1' => 'b',
             'q2' => 'c',
             'q3' => 'b',
