@@ -89,6 +89,8 @@ CREATE TABLE IF NOT EXISTS `quiz2`.`QUESTION` (
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
+    <a href="add_questions.php">Añadir preguntas</a>
+    <a href="delete_questions.php">Eliminar preguntas y actualizar preguntas</a>
     <form method="post" action="index.php">
         <h1>PHP Quiz</h1>
 
