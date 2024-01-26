@@ -1,20 +1,43 @@
-version: '3'
+version: "3.7"
 
 services:
-  php:
-    image: php:8.0-apache
-    container_name: my_php_app
+  server:
+    image: fjortegan/nginx-fpm
     ports:
-      - "8080:80"
+      - "80:80"
+    volumes:
+      - ./src:/usr/share/nginx/html
+    links:
+      - fpm
+
+  fpm:
+    image: fjortegan/php-xdebug
     volumes:
       - ./src:/var/www/html
+    # Sólo en máquinas Linux, comentar estas dos líneas en otros sistemas de lusers
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: /bin/bash -c "apt-get update && apt-get install -y \
+      && docker-php-ext-install mysqli \
+      && docker-php-ext-enable mysqli \
+      && php-fpm"
 
   db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: quiz2
-    volumes:
-      - ./initSQL:/docker-entrypoint-initdb.d
+      image: mysql
+      command: --default-authentication-plugin=mysql_native_password
+      environment:
+        MYSQL_ROOT_PASSWORD: user
+        MYSQL_DATABASE: quiz2
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+      ports:
+        - "3306:3306"
+      volumes:
+        - ./initSQL:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin
     ports:
-      - 3306:3306
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
