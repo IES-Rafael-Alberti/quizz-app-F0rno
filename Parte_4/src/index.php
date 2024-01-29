@@ -85,7 +85,6 @@
             }
         ?>
         <h1>PHP Quiz</h1>
-
         <!-- Get questions from quiz 1 from the DB and convert it to html -->
         <?php
             $sql = "SELECT * FROM QUESTION WHERE QUIZ_quiz_id = 1";
